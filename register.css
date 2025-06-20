@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+ h1{
+  position:absolute;
+  top:10px;
+  width: 100%;
+  color: #462bb4;
+  text-align: center;
+}
+ h1:hover{
+  color: #18c8c8;
+}
+.inline-group{
+  display:flex;
+  align-items: center;
+  gap: 1px;
+}
+.wrapper{
+  position: relative;
+  width: 350px;
+  height: 590px;
+  background: transparent;
+  border: 2px solid rgb(236, 119, 183);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgb(100, 84, 218);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  overflow-y: auto;
+}
+ form button{
+  display: flex;
+  border: 0;
+  border-radius: 10px;
+  width: 310px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #462bb4;
+  color: white;
+}
+button:hover {
+  background-color:fuchsia;
+}
+form input{
+  border: 0;
+  border-radius: 5px;
+  padding:10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  margin-bottom: 5px;
+  font-size: 150x;
+ }
+ form input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.form-container {
+  display: none;
+}
+.active {
+  display: block;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#recruiter-btn, #user-btn {
+  padding: 10px ;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin:  0 10px;
+}
+
+#recruiter-btn {
+  background-color: #462bb4;
+  color: #fff;
+  margin-right: 10px;
+}
+
+#user-btn {
+  background-color: #462bb4;
+  color: #fff;
+}
+
+#recruiter-btn:hover, #user-btn:hover {
+  background-color: fuchsia;}
+
+  form label {
+    display: block;
+    margin-bottom: 1px;
+  }
+  
+  form div {
+    margin-bottom: 10px;
+  }
+  
+  form div label {
+    margin-right: 10px;
+  }
+  
+  
+  

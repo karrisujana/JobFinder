@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Form</title>
+  <link rel="stylesheet" href="register.css">
+  <script>
+
+    
+document.addEventListener("DOMContentLoaded", () => {
+  const recruiterBtn = document.getElementById('recruiter-btn');
+  const userBtn = document.getElementById('user-btn');
+  const recruiterFormContainer = document.getElementById('recruiter-form-container');
+  const userFormContainer = document.getElementById('user-form-container');
+  const recruiterForm = document.getElementById('recruiter-form');
+  const userForm = document.getElementById('user-form');
+
+  recruiterBtn.addEventListener('click', () => {
+    recruiterFormContainer.classList.add('active');
+    userFormContainer.classList.remove('active');
+  });
+
+  userBtn.addEventListener('click', () => {
+    userFormContainer.classList.add('active');
+    recruiterFormContainer.classList.remove('active');
+  });
+
+  recruiterForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(recruiterForm);
+    try {
+      const response = await fetch("http://localhost:5000/register/recruiter", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        alert("Form submitted successfully!");
+        recruiterForm.reset();
+      } else {
+        const errorData = await response.text();
+        alert("Form submission failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error occurred while submitting the form:", error);
+      alert("An error occurred while submitting the form. Please check your connection and try again.");
+    }
+  });
+
+  userForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(userForm);
+    try {
+      const response = await fetch("http://localhost:5000/post", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        alert("Form submitted successfully!");
+        userForm.reset();
+      } else {
+        const errorData = await response.text();
+        alert("Form submission failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error occurred while submitting the form:", error);
+      alert("An error occurred while submitting the form. Please check your connection and try again.");
+    }
+  });
+});
+
+
+  </script>
+</head>
+<body>
+ 
+  <div class="wrapper">
+    
+    <div class="button-container">
+    <button id="recruiter-btn">Recruiter</button>
+    <button id="user-btn">User</button>
+    </div>
+    <div id="recruiter-form-container" class="form-container">
+      <form id="recruiter-form" action="http://localhost:5000/register/recruiter" method="post">
+        
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <label>Company:</label>
+        <input type="text" name="company" placeholder="Enter your company" required>
+        <button type="submit">Submit</button>
+        <p>Already have an account?
+          <a href="./login.html">Login</a></p>
+      </form>
+    </div>
+    
+    <div id="user-form-container" class="form-container">
+
+  <form id="user-form" action="http://localhost:5000/post" method="post" enctype="multipart/form-data">
+   
+    <label>Name:</label>
+    <input type="text" name="name" placeholder="Enter your name" required>
+    <label>Email:</label>
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <label>Password:</label>
+    <input type="password" name="password" placeholder="Enter your password" required>
+    <label>Phone Number:</label>
+    <input type="number" name="phoneNumber" placeholder="Enter your phone number"   required>
+    <label>Age:</label>
+    <input type="number" name="age" placeholder="Enter your age" required>
+    <label>Gender:</label>
+    <div class="inline-group">
+  <input type="radio" id="male" name="gender" value="Male" required>Male
+  <input type="radio" name="gender" value="Female" required>Female
+</div>
+    
+    <div style="display: flex; align-items: center;">
+      <label>Skills:</label>
+    <select name="skills" required>
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Python">Python</option>
+      <option value="Java">Java</option>
+      <option value="C">C</option>
+    </select>
+  </div>
+    <label>Experience:</label>
+    <input type="number" name="experience" placeholder="Enter your experience" required><br>
+    <!-- <label>Photo:</label>
+    <input type="file" name="photo" accept=".jpg, .jpeg, .png" required><br><br>
+    <label>Resume:</label>
+    <input type="file" name="resume" accept=".pdf, .doc, .docx" required><br><br> -->
+    <button  type="submit">Submit</button>
+    <p>Already have an account?
+      <a href="./login.html">Login</a></p>
+  </form>
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <header>
+    <h2 class="logo">Jobfinder</h2>
+    <nav>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./login.html">Login</a>
+</nav>
+  </header>
+  <main>
+    <h1 id="greeting"></h1>
+    <p id="welcome-message">
+      <span class="welcome">Welcome,</span>
+      <br>
+      <span class="jobfinder"> To Jobfinder</span>
+      <br>
+      <span class="tagline">The Way to Choose Your Dreamjob</span>
+    </p>
+    <a  id="register-link" href="./register.html">Register</a>
+  </main>
+  <div id="skill-buttons-container">
+    <button id="python-btn" class="skill-button"  style="display: none;">Python</button>
+    <button id="java-btn" class="skill-button"  style="display: none;">Java</button>
+    <button id="javascript-btn" class="skill-button"  style="display: none;">JavaScript</button>
+    <button id="css-btn" class="skill-button"  style="display: none;">Css</button>
+    <button id="html-btn" class="skill-button"  style="display: none;">Html</button>
+    <button id="c-btn" class="skill-button"  style="display: none;">C</button>
+  </div>
+  <div id="table-container" ></div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get("username");
+    if (username) {
+      document.getElementById("greeting").textContent =  `Hello, ${username}`;
+      document.getElementById("welcome-message").style.display = "none";
+       document.getElementById("register-link").style.display = "none";
+       const skillButtons = document.querySelectorAll('.skill-button');
+        skillButtons.forEach(button => {
+        button.style.display = 'block';
+  });
+    const pythonBtn = document.getElementById('python-btn');
+    const javaBtn = document.getElementById('java-btn');
+    const javascriptBtn = document.getElementById('javascript-btn');
+    const cssBtn = document.getElementById('css-btn');
+    const htmlBtn = document.getElementById('html-btn');
+    const cBtn = document.getElementById('c-btn');
+
+    pythonBtn.addEventListener('click', () => {
+      fetchPythonData();
+    });
+
+    javaBtn.addEventListener('click', () => {
+      fetchJavaData();
+    });
+
+    javascriptBtn.addEventListener('click', () => {
+      fetchJavascriptData();
+    });
+
+    cssBtn.addEventListener('click', () => {
+      fetchCssData();
+    });
+
+    htmlBtn.addEventListener('click', () => {
+      fetchHtmlData();
+    });
+
+    cBtn.addEventListener('click', () => {
+      fetchCData();
+    });
+    
+function displayData(data) {
+  const tableContainer = document.getElementById('table-container');
+  tableContainer.innerHTML = '';
+  const table = document.createElement('table');
+  table.style.border = '1px solid black';
+  table.style.borderCollapse = 'collapse';
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+
+  const headers = ['Name', 'Age', 'Phone No', 'Email','Skill', 'Experience'];
+  headers.forEach(header => {
+    const th = document.createElement('th');
+    th.style.border = '1px solid black';
+    th.style.padding = '10px';
+    th.textContent = header;
+    thead.appendChild(th);
+  });
+
+  data.forEach(user => {
+    const row = document.createElement('tr');
+    const nameCell = document.createElement('td');
+    nameCell.style.border = '1px solid black';
+    nameCell.style.padding = '10px';
+    nameCell.textContent = user.name;
+    row.appendChild(nameCell);
+
+    
+
+    const ageCell = document.createElement('td');
+    ageCell.style.border = '1px solid black';
+    ageCell.style.padding = '10px';
+    ageCell.textContent = user.age;
+    row.appendChild(ageCell);
+
+    const phoneNoCell = document.createElement('td');
+    phoneNoCell.style.border = '1px solid black';
+    phoneNoCell.style.padding = '10px';
+    phoneNoCell.textContent = user.phoneNumber;
+    row.appendChild(phoneNoCell);
+
+    const emailCell = document.createElement('td');
+emailCell.style.border = '1px solid black';
+emailCell.style.padding = '10px';
+emailCell.textContent = user.email;
+row.appendChild(emailCell);
+
+
+    const skillCell = document.createElement('td');
+    skillCell.style.border = '1px solid black';
+    skillCell.style.padding = '10px';
+    skillCell.textContent = user.skills;
+    row.appendChild(skillCell);
+
+    const experienceCell = document.createElement('td');
+    experienceCell.style.border = '1px solid black';
+    experienceCell.style.padding = '10px';
+    experienceCell.textContent = user.experience;
+    row.appendChild(experienceCell);
+
+
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  tableContainer.appendChild(table);
+}
+
+function fetchPythonData() {
+  fetch('http://localhost:5000/skills/python')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+
+function fetchJavaData() {
+  fetch('http://localhost:5000/skills/java')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+
+function fetchJavascriptData() {
+  fetch('http://localhost:5000/skills/javascript')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+
+function fetchCssData() {
+  fetch('http://localhost:5000/skills/css')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+
+function fetchHtmlData() {
+  fetch('http://localhost:5000/skills/html')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+
+function fetchCData() {
+  fetch('http://localhost:5000/skills/c')
+    .then(response => response.json())
+    .then(data => displayData(data))
+    .catch(error => console.error(error));
+}
+}
+  </script>
+</body>
+</html>
